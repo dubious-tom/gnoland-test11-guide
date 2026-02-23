@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnoland Test11 Guide - Curiosity Nodes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #FF6B35;
+            --red: #E63946;
+            --yellow: #FFB627;
+            --deep-blue: #1A3A52;
+            --space-black: #0A0E17;
+            --off-white: #F7F7F2;
+            --code-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: var(--space-black);
+            color: var(--off-white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--deep-blue), var(--space-black));
+            border-bottom: 3px solid var(--orange);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-small {
+            width: 50px;
+            height: auto;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav a {
+            color: var(--yellow);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--orange);
+            text-shadow: 0 0 10px var(--orange);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 var(--orange);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--orange);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--yellow);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            font-family: 'Orbitron', sans-serif;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--orange);
+            color: var(--yellow);
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: var(--orange);
+            color: var(--space-black);
+        }
+
+        .tab.active {
+            background: var(--yellow);
+            color: var(--space-black);
+            border-color: var(--yellow);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(26, 58, 82, 0.3));
+            border: 2px solid var(--orange);
+            padding: 1.5rem;
+        }
+
+        .info-label {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: var(--off-white);
+            word-break: break-all;
+            font-size: 0.95rem;
+        }
+
+        .info-value a {
+            color: var(--orange);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .info-value a:hover {
+            color: var(--yellow);
+            text-shadow: 0 0 10px var(--yellow);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            border: 2px solid var(--orange);
+            border-left: 4px solid var(--yellow);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block code {
+            color: var(--off-white);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--orange);
+            color: var(--space-black);
+            border: none;
+            padding: 0.5rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--yellow);
+        }
+
+        /* Command Table */
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(26, 58, 82, 0.2);
+            border: 2px solid var(--orange);
+        }
+
+        .command-table th {
+            background: var(--orange);
+            color: var(--space-black);
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: left;
+        }
+
+        .command-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .command-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .command-table code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            color: var(--yellow);
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-warning {
+            background: rgba(255, 182, 39, 0.1);
+            border-color: var(--yellow);
+        }
+
+        .alert-info {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--orange);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+            margin-top: 4rem;
+        }
+
+        .copyright {
+            color: var(--off-white);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                width: 100%;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="assets/logo.svg" alt="Curiosity Nodes" class="logo-small">
+            <span class="header-title">Gnoland Test11</span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="https://x.com/Curiosity_Nodes" target="_blank">Twitter</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Gnoland Test11 Guide</h1>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Complete setup and maintenance guide for Gnoland Test11 validator nodes.</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('api')">API & Sync</button>
+            <button class="tab" onclick="switchTab('install')">Installation</button>
+            <button class="tab" onclick="switchTab('cheat')">Cheat Sheet</button>
+        </div>
+
+        <!-- API & Sync Tab -->
+        <div id="api" class="tab-content active">
+            <h2>Network Information</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Chain ID</div>
+                    <div class="info-value">test11</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">RPC Endpoint</div>
+                    <div class="info-value"><a href="https://gnoland-testnet-rpc.itrocket.net" target="_blank">gnoland-testnet-rpc.itrocket.net</a></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Explorer</div>
+                    <div class="info-value"><a href="https://test11.testnets.gno.land" target="_blank">test11.testnets.gno.land</a></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Faucet</div>
+                    <div class="info-value"><a href="https://faucet.gno.land" target="_blank">faucet.gno.land</a></div>
+                </div>
+            </div>
+
+            <h3>Snapshot (Recommended)</h3>
+            <p>Using a snapshot significantly reduces sync time. Shazoes provides reliable snapshots updated regularly:</p>
+            
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code># Install required tools
+sudo apt-get update
+sudo apt-get install -y aria2 lz4
+
+# Stop the service
+sudo systemctl stop gnoland
+
+# Backup critical state
+cp ~/.gno/gnoland-data/data/priv_validator_state.json ~/priv_validator_state.json.backup
+
+# Download and extract snapshot
+cd ~
+aria2c -x 16 -s 16 https://download.shazoes.network/test11/snapshot-gnoland.tar.lz4
+lz4 -dc snapshot-gnoland.tar.lz4 | tar -xf - -C ~/.gno/gnoland-data
+
+# Restore validator state
+cp ~/priv_validator_state.json.backup ~/.gno/gnoland-data/data/priv_validator_state.json
+
+# Start the service
+sudo systemctl start gnoland
+sudo journalctl -u gnoland -f
+</code>
+            </div>
+
+            <h3>Peers Configuration</h3>
+            <p>For optimal connectivity, use multiple peers. Shazoes provides a comprehensive list:</p>
+            
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code># Edit config.toml
+nano ~/.gno/gnoland-data/config/config.toml
+
+# Add these peers to persistent_peers:
+persistent_peers = "6d21bd14f7799ddd48f28f1adbbf45bef1fc6f87@162.19.236.117:26656,0a90e84d8f1e5edd68ad59de6fa13ab94c5fcf63@135.181.28.53:60656,50ec7ce2b87a64bdd9f7af9e35745d5ca53808ca@136.243.33.202:60656,4de09e0e1a1fdcf0eb1afc97e9f87ba1e62a4d77@185.107.68.148:26656,ad7c35bb1e6925f48b74c4f98b4c0af3dc0b8c29@195.14.6.192:26656,e74ddd7edbca1fd58e84ccebf4cc9f6eaaf7e3a5@81.0.218.102:26656,b86e19048b38e86e5e045636d5e0ca2fe0a4b49a@78.46.99.50:54656,6546351f5bc5ba0f1932969b788c5a854c75d4c1@91.183.62.162:26656,8feec2166118a3638a4c428b66e25e1c0e3c8ac1@141.94.109.8:26656,9c0d52cf1bc0b2526a9c45fb76e8a0df3fe087c8@49.12.215.72:26656,6fff6e4e8255916e87cbc00b8a87e44b4c7a8caf@195.201.108.97:26656,0ad4b88a62e3c2d1a14ee36bb4e3c01a87c6edcf@116.202.162.188:26656,f0bf16d86d21b2dae7d68b2a6e6f77f4bbed9050@104.248.142.50:26656,bdc6b8be51e95894d1c98d2f2e32e2cc5e9a7c20@65.21.138.123:56656,ebf6ab8a60abd9de4cda8ea42c76bb2017ca5cc9@84.247.171.137:26656,4b783261c6de7b17ccc96b66ce8b88e90b58ee1f@51.81.107.139:26656,ea5077cfd91e68e5d4fc79697bbba2a2aeee8da1@51.158.191.108:26656,0d9c005ab2833bc312f885123bfc311884b48b82@51.81.155.26:10656,1bcc9d09fb43b1f5ef92023edae23ed4c0c0a044@51.81.208.96:26656,f3ee00dc8ea87beaf7e00b0aedd1e2be03d2ac51@207.180.253.126:26656,b3e0bc45a42f55f7ae71c77f49c0c1c5ac33e0e4@185.209.229.198:26656,f6d9b4b5ab8a51f8a26d9e6ec5663bc0b9ea2e77@135.181.73.170:26656,79f1e41ba9965b0f04c3f4cb8f1dfcaed5c85e94@207.180.220.76:26656,6d1b494f86ab01f6ce37bd08f52efcbea9f45ed8@88.99.167.224:26656"
+
+# Set PEX to true
+pex = true
+</code>
+            </div>
+        </div>
+
+        <!-- Installation Tab -->
+        <div id="install" class="tab-content">
+            <h2>Installation Guide</h2>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Important:</strong> This guide assumes Ubuntu 22.04 LTS. Adjust commands for other distributions.
+            </div>
+
+            <h3>1. Install Dependencies</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential git wget jq make gcc aria2 lz4</code>
+            </div>
+
+            <h3>2. Install Go</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.23.0.linux-amd64.tar.gz
+rm go1.23.0.linux-amd64.tar.gz
+
+# Add to PATH
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify
+go version</code>
+            </div>
+
+            <h3>3. Install Gnoland</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>cd ~
+git clone https://github.com/gnolang/gno.git
+cd gno
+git checkout master
+make install
+
+# Verify installation
+gnoland version</code>
+            </div>
+
+            <h3>4. Initialize Node</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code># Download genesis
+mkdir -p ~/.gno/gnoland-data/config
+cd ~/.gno/gnoland-data/config
+wget https://gnoland-testnet-snapshots.itrocket.net/genesis.json
+
+# Generate node keys (if not already present)
+cd ~/.gno/gnoland-data/config
+gnoland secrets init
+gnoland secrets get node_key.json
+gnoland secrets get priv_validator_key.json</code>
+            </div>
+
+            <h3>5. Configure Systemd Service</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>sudo tee /etc/systemd/system/gnoland.service > /dev/null <<EOF
+[Unit]
+Description=Gnoland Node
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$HOME/go/bin/gnoland start \\
+  --genesis $HOME/.gno/gnoland-data/config/genesis.json \\
+  --data-dir $HOME/.gno/gnoland-data \\
+  --skip-genesis-sig-verification \\
+  --log-level info
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+StandardOutput=append:/var/log/gnoland/output.log
+StandardError=append:/var/log/gnoland/error.log
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Create log directory
+sudo mkdir -p /var/log/gnoland
+sudo chown $USER:$USER /var/log/gnoland
+
+# Enable and start service
+sudo systemctl daemon-reload
+sudo systemctl enable gnoland
+sudo systemctl start gnoland</code>
+            </div>
+
+            <h3>6. Configure Log Rotation</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>sudo tee /etc/logrotate.d/gnoland > /dev/null <<EOF
+/var/log/gnoland/*.log {
+    daily
+    rotate 7
+    maxsize 1G
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+    postrotate
+        systemctl reload gnoland > /dev/null 2>&1 || true
+    endscript
+}
+EOF
+
+# Test log rotation
+sudo logrotate /etc/logrotate.d/gnoland --debug</code>
+            </div>
+
+            <h3>7. Apply Snapshot (Recommended)</h3>
+            <p>See the <strong>API & Sync</strong> tab for snapshot instructions.</p>
+
+            <h3>8. Create Wallet & Register Validator</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code># Create wallet
+gnokey add myvalidator
+
+# Get tokens from faucet: https://faucet.gno.land
+
+# Register validator profile
+gnokey maketx call myvalidator \\
+  --pkgpath "gno.land/r/gnops/valopers" \\
+  --func RegisterValidator \\
+  --gas-wanted 5000000 \\
+  --gas-fee 1000000ugnot \\
+  --send "1000000ugnot" \\
+  --broadcast \\
+  --chainid test11 \\
+  --remote https://gnoland-testnet-rpc.itrocket.net:443 \\
+  --args "YOUR_MONIKER" \\
+  --args "YOUR_DESCRIPTION" \\
+  --args "YOUR_TELEGRAM_USERNAME"</code>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>📝 Next Steps:</strong> After registration, submit a GovDAO proposal to activate your validator. Check Discord for instructions.
+            </div>
+        </div>
+
+        <!-- Cheat Sheet Tab -->
+        <div id="cheat" class="tab-content">
+            <h2>Command Cheat Sheet</h2>
+
+            <h3>Service Management</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sudo systemctl start gnoland</code></td>
+                        <td>Start the Gnoland service</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo systemctl stop gnoland</code></td>
+                        <td>Stop the Gnoland service</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo systemctl restart gnoland</code></td>
+                        <td>Restart the Gnoland service</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo systemctl status gnoland</code></td>
+                        <td>Check service status</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo journalctl -u gnoland -f</code></td>
+                        <td>Follow service logs in real-time</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo journalctl -u gnoland -n 100</code></td>
+                        <td>View last 100 log lines</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Node Status</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>curl localhost:26657/status</code></td>
+                        <td>Check local node status</td>
+                    </tr>
+                    <tr>
+                        <td><code>curl https://gnoland-testnet-rpc.itrocket.net/status</code></td>
+                        <td>Check network RPC status</td>
+                    </tr>
+                    <tr>
+                        <td><code>curl localhost:26657/net_info</code></td>
+                        <td>View connected peers</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Wallet Management</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>gnokey add WALLET_NAME</code></td>
+                        <td>Create new wallet</td>
+                    </tr>
+                    <tr>
+                        <td><code>gnokey list</code></td>
+                        <td>List all wallets</td>
+                    </tr>
+                    <tr>
+                        <td><code>gnokey query auth/accounts/ADDRESS --remote https://gnoland-testnet-rpc.itrocket.net:443</code></td>
+                        <td>Check wallet balance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Validator Operations</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>cat ~/.gno/gnoland-data/config/priv_validator_key.json</code></td>
+                        <td>View validator address</td>
+                    </tr>
+                    <tr>
+                        <td><code>cat ~/.gno/gnoland-data/config/node_key.json</code></td>
+                        <td>View node key</td>
+                    </tr>
+                    <tr>
+                        <td><code>curl localhost:26657/validators</code></td>
+                        <td>List active validators</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Maintenance</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>df -h</code></td>
+                        <td>Check disk usage</td>
+                    </tr>
+                    <tr>
+                        <td><code>du -sh ~/.gno/gnoland-data/</code></td>
+                        <td>Check node data size</td>
+                    </tr>
+                    <tr>
+                        <td><code>sudo logrotate /etc/logrotate.d/gnoland --force</code></td>
+                        <td>Force log rotation</td>
+                    </tr>
+                    <tr>
+                        <td><code>tar -czf validator-keys-backup.tar.gz ~/.gno/gnoland-data/config/*.json</code></td>
+                        <td>Backup validator keys</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Update Node</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code># Backup keys first!
+cp ~/.gno/gnoland-data/data/priv_validator_state.json ~/priv_validator_state.json.backup
+tar -czf ~/validator-keys-backup-$(date +%Y%m%d-%H%M%S).tar.gz ~/.gno/gnoland-data/config/*.json
+
+# Stop service
+sudo systemctl stop gnoland
+
+# Update binary
+cd ~/gno
+git pull
+git checkout master
+make install
+
+# Verify version
+gnoland version
+
+# Restore validator state
+cp ~/priv_validator_state.json.backup ~/.gno/gnoland-data/data/priv_validator_state.json
+
+# Start service
+sudo systemctl start gnoland
+sudo journalctl -u gnoland -f</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">© 2026 Curiosity Nodes · <a href="https://curiositynodes.cc" style="color: var(--orange);">curiositynodes.cc</a></p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
