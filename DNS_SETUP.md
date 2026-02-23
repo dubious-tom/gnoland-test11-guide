@@ -33,7 +33,7 @@ TTL: 3600
 ```
 Type: CNAME
 Name: www
-Value: haroondilshad.github.io
+Value: dubious-tom.github.io
 TTL: 3600
 ```
 
